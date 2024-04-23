@@ -1,0 +1,97 @@
+<!-- <h2>Auth form</h2>
+<br> -->
+
+<!-- <form #f1="ngForm">
+    <input type="text" name="nom" #nom="ngModel" ngModel required minlength="5" >
+    <div *ngIf = "nom.errors && nom.touched" >
+        <small *ngIf = "nom.touched" >Username is required.</small>
+        <small *ngIf = "nom.errors['minlength']" >Username must be at least 5 characters long.</small>
+    </div>
+    {{nom.value}}
+
+</form> -->
+
+<!-- template driver  -->
+<form #registerForm="ngForm">
+
+    <div class="form-group">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" name="username" id="username" #username="ngModel" ngModel required minlength="3" maxlength="10">
+        <div *ngIf="username.errors && username.touched">
+            <small *ngIf="username.errors['required']">Le champ « username » est obligatoire.</small>
+            <small *ngIf="username.errors['minlength'] || username.errors['maxlength']">Le champ « username » doit contenir entre 3 et 10 caractères.</small>
+        </div>
+    </div>
+
+
+
+    <div>
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" #password="ngModel" ngModel required ><br>
+        <small *ngIf="password.errors?.['required'] && password.touched ">ce champs est obligatoire.</small>
+      </div><br>
+      <div>
+        <label for="confirmPassword">Confirmation du mot de passe:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" #confirmPassword="ngModel" ngModel required  ><br>
+        <small *ngIf="confirmPassword.errors?.['required'] && confirmPassword.touched">ce champs est obligatoire.</small>
+        <small *ngIf="password.value !== confirmPassword.value && password.dirty && confirmPassword.dirty" class="error-message">
+          Les mots de passe ne correspondent pas.
+        </small>
+      </div><br>
+
+
+    <div class="form-group">
+        <label for="country">Pays :</label>
+        <select name="country" id="country" #country="ngModel" ngModel required>
+            <option value=""></option>
+            <option value="Alg">Algérie</option>
+            <option value="Uk">Royaume-Uni</option>
+            <option value="Usa">États-Unis</option>
+        </select>
+        <div *ngIf="country.errors">
+            <small *ngIf="country.errors['required']">Le champ « country » est obligatoire.</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="email" #email="ngModel" ngModel required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com">
+        <div *ngIf="email.errors && email.touched">
+            <small *ngIf="email.errors['required']">Le champ Email est obligatoire.</small>
+            <small *ngIf="email.errors['pattern']">Le champ Email doit suivre le format exemple"&#64;"d.com</small>
+        </div>
+    </div>
+    
+
+
+    <div class="form-group">
+        <label>Sexe :</label>
+        <label><input type="radio" name="sexe" value="male" #sexe="ngModel" ngModel required> Homme</label>
+        <label><input type="radio" name="sexe" value="female" #sexe="ngModel" ngModel required> Femme</label>
+
+        <div *ngIf="sexe.errors">
+            <small *ngIf="sexe.errors['required']">Le champ sexe est obligatoire.</small>
+        
+        </div>
+    </div>
+
+    
+
+    <div class="form-group">
+        <label>Language :</label>
+        <label><input type="checkbox" name="language" value="english" #language="ngModel" ngModel required> J'accepte les termes du service</label>
+
+        <div *ngIf="language.errors">
+            <small *ngIf="language.errors['required']">Le champ language est obligatoire.</small>
+        
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid || password.value !== confirmPassword.value && password.dirty && confirmPassword.dirty ">S'inscrire</button>
+</form>
+
+
+
+  
+
+
